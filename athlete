@@ -1,0 +1,6 @@
+public class Athlete extends User {
+
+    public Athlete(String id, String name) {
+        super(id, name);
+    }
+}
