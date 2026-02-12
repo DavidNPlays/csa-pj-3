@@ -1,6 +1,45 @@
 public class Athlete extends User {
+    private int grade;
+    private String team;
+    private int rating;
+    private String status;
+    private String notes;
 
-    public Athlete(String id, String name) {
+    public Athlete(String id, String name, int grade, String team, int rating; String status, String notes) {
         super(id, name);
+        this.grade=grade;
+        this.team=team;
+        this.rating=rating;
+        this.status=status;
+        this.notes=notes;
+    }
+
+
+    public void updateRating(int change){
+        rating=rating+change;
+    }
+    public void updateNotes(String note){
+        notes=notes.concat(note);
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getSport()
+    {
+        return sport;
+    
+    }
+
+    public String getLevel()
+    {
+        return level;
+    }
+
+    public String toString()
+    {
+        return "Athlete Name: " + name + "| Sport: " + sport + "| Level: " + level;
     }
 }

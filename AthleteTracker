@@ -8,20 +8,5 @@ public class AthleteTracker {
 
     public AthleteTracker() {
 
-        pass = new ArrayList<>();
-        athletes = new ArrayList<>();
-
-        // Add passwords
-        pass.add("password");
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter password:");
-        String password = sc.nextLine();
-
-        if (pass.contains(password)) {
-            System.out.println("Access granted!");
-        } else {
-            System.out.println("Incorrect password");
-        }
     }
 }

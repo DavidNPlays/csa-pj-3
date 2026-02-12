@@ -1,0 +1,7 @@
+import java.util.ArrayList;
+public Class PersonalBestTracker(){
+   private ArrayList<Goal> goals;
+   
+
+
+}

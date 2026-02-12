@@ -1,6 +1,8 @@
 public class Coach extends User {
 
-    public Coach(String id, String name) {
+    private String team;
+    public Coach(String id, String name, String team) {
         super(id, name);
+        this.team=team;
     }
 }
