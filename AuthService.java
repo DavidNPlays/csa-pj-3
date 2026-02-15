@@ -2,13 +2,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
- * Simple authentication. Uses HashMap for credentials.
- * (Not secure - just a school project demo.)
- */
+//Simple authentication. Uses HashMap for credentials.
+
 public class AuthService {
-    private final Map<String, String> userToPass;
-    private final Map<String, Coach> userToCoach;
+    private final Map<String, String> userToPass; //username and password
+    private final Map<String, Coach> userToCoach; //user profile with id, name, team name
 
     public AuthService() {
         userToPass = new HashMap<>();

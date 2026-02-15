@@ -1,9 +1,7 @@
-/**
- * A single practice session (date/time + optional workout + notes).
- */
+//A single practice session
 public class Practice {
     private final String id;
-    private final String dateTime; // keep as String for simplicity in APCSA
+    private final String dateTime;
     private final String type;
     private String notes;
     private Workout workout; // optional
@@ -14,7 +12,7 @@ public class Practice {
         this.type = type;
         this.notes = notes;
     }
-
+    //getters and setters
     public String getId() {
         return id;
     }

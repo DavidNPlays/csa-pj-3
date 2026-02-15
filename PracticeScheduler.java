@@ -13,8 +13,8 @@ public class PracticeScheduler {
     }
 
     public Practice schedulePractice(String dateTime, String type, String notes) {
-        String id = String.format("P%03d", nextId++);
-        Practice p = new Practice(id, dateTime, type, notes);
+        String id = String.format("P%03d", nextId++); //makes practice id number
+        Practice p = new Practice(id, dateTime, type, notes); //creates new practice
         practices.add(p);
         return p;
     }
@@ -24,8 +24,8 @@ public class PracticeScheduler {
     }
 
     public Practice findById(String id) {
-        for (Practice p : practices) {
-            if (p.getId().equalsIgnoreCase(id)) return p;
+        for (Practice p : practices) { //find a practice by the practice id number
+            if (p.getId().equalsIgnoreCase(id)) return p; //if a practice has the id number, return the practice
         }
         return null;
     }
@@ -37,7 +37,7 @@ public class PracticeScheduler {
         }
         System.out.println("=== Practices ===");
         for (Practice p : practices) {
-            System.out.println(" - " + p);
+            System.out.println(" - " + p); //returns a list of scheduled practices
         }
     }
 }

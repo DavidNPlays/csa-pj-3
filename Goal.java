@@ -1,7 +1,4 @@
-/**
- * A goal for an athlete metric (e.g., "50 free" target time).
- * higherIsBetter = false for time-based goals (lower is better).
- */
+//A goal for an athlete metric (e.g., "50 free" target time). higherIsBetter = false for time-based goals (lower is better).
 public class Goal {
     private final String athleteName;
     private final String metricType;
@@ -16,7 +13,7 @@ public class Goal {
         this.deadline = deadline;
         this.higherIsBetter = higherIsBetter;
     }
-
+    //getters and setters
     public String getAthleteName() {
         return athleteName;
     }

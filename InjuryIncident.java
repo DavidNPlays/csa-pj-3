@@ -7,7 +7,7 @@ public class InjuryIncident {
     private final String description;
     private final String severity;
     private final String status;
-
+    //constructor
     public InjuryIncident(String athleteName, String date, String description, String severity, String status) {
         this.athleteName = athleteName;
         this.date = date;
@@ -15,7 +15,7 @@ public class InjuryIncident {
         this.severity = severity;
         this.status = status;
     }
-
+    //getter
     public String getAthleteName() {
         return athleteName;
     }

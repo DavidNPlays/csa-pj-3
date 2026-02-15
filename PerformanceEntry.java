@@ -1,6 +1,4 @@
-/**
- * A logged performance entry for a metric (value + date + notes).
- */
+//A logged performance entry for a metric (value + date + notes).
 public class PerformanceEntry {
     private final String athleteName;
     private final String metricType;
@@ -15,7 +13,7 @@ public class PerformanceEntry {
         this.date = date;
         this.notes = notes;
     }
-
+    //getters and setters
     public String getAthleteName() {
         return athleteName;
     }
