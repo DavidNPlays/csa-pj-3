@@ -18,14 +18,14 @@ public class AthleteRoster {
     public ArrayList<Athlete> getAll() {
         return athletes;
     }
-    // advanced for loop that iterates through each athlete in the athletes arraylist, looking specifically at ID 
+    // enhanced for loop that iterates through each athlete in the athletes arraylist, looking specifically at ID 
     public Athlete findById(String id) {
         for (Athlete a : athletes) {
             if (a.getId().equalsIgnoreCase(id)) return a;
         }
         return null;
     }
-    // advanced for loop that iterates through each athlete in the athletes arraylist, looking specifically at name
+    // enhanced for loop that iterates through each athlete in the athletes arraylist, looking specifically at name
     public Athlete findByNameExact(String name) {
         for (Athlete a : athletes) {
             if (a.getName().equalsIgnoreCase(name)) return a;
