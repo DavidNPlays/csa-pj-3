@@ -1,43 +1,44 @@
-public Class PerformanceEntry(){
-    public String name;
-    public String type;
-    public double value;
-    public String date;
-    public String notes;
-    public String goal;
-    public boolean typeOfGoal;//true is higher is a better value, false is lower is a better value
+/**
+ * A logged performance entry for a metric (value + date + notes).
+ */
+public class PerformanceEntry {
+    private final String athleteName;
+    private final String metricType;
+    private final double value;
+    private final String date;
+    private final String notes;
 
-    public Goal(String name, String type, double value, String date, String notes, String goal, boolean type){
-        this.name=name;
-        this.type=type;
-        this.value=value;
-        this.date=date;
-        this.notes=notes
-        this.goal=goal
-        this.higher=higher;
+    public PerformanceEntry(String athleteName, String metricType, double value, String date, String notes) {
+        this.athleteName = athleteName;
+        this.metricType = metricType;
+        this.value = value;
+        this.date = date;
+        this.notes = notes;
     }
 
-    public String toString(){
-        return name + " made a performance entry for " + type + " ,the new value is " + value + " on " + date + " Notes: " + notes;
+    public String getAthleteName() {
+        return athleteName;
     }
-    public String getName(){
-        return name;
+
+    public String getMetricType() {
+        return metricType;
     }
-    public String getType(){
-        return type;
-    }
-    public String getGoal(){
-        return goal;
-    }
-    public double getValue(){
+
+    public double getValue() {
         return value;
     }
-    public boolean gettypeOfGoal(){
-        return typeOfGoal;
+
+    public String getDate() {
+        return date;
     }
 
+    public String getNotes() {
+        return notes;
+    }
 
-
-
-
+    @Override
+    public String toString() {
+        return athleteName + " entry: " + metricType + " = " + value + " (" + date + ")" +
+                (notes == null || notes.isBlank() ? "" : " | notes: " + notes);
+    }
 }

@@ -1,11 +1,27 @@
-public class InjuryIncident(){
-    public String athleteName;
-    public String date;
-    public String description;
-    public String severity;
-    public String status;
+/**
+ * Injury incident record.
+ */
+public class InjuryIncident {
+    private final String athleteName;
+    private final String date;
+    private final String description;
+    private final String severity;
+    private final String status;
 
-    public String toString(){
-        return athleteName + description + date + severity + status;
+    public InjuryIncident(String athleteName, String date, String description, String severity, String status) {
+        this.athleteName = athleteName;
+        this.date = date;
+        this.description = description;
+        this.severity = severity;
+        this.status = status;
+    }
+
+    public String getAthleteName() {
+        return athleteName;
+    }
+
+    @Override
+    public String toString() {
+        return athleteName + " | " + date + " | " + severity + " | " + status + " | " + description;
     }
 }

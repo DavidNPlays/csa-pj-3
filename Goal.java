@@ -1,23 +1,45 @@
-public Class Goal(){
-    public String name;
-    public String type;
-    public double target;
-    public String deadline;
-    public boolean typeOfGoal;//true is higher is a better value, false is lower is a better value
+/**
+ * A goal for an athlete metric (e.g., "50 free" target time).
+ * higherIsBetter = false for time-based goals (lower is better).
+ */
+public class Goal {
+    private final String athleteName;
+    private final String metricType;
+    private final double targetValue;
+    private final String deadline;
+    private final boolean higherIsBetter;
 
-    public Goal(String name, String type, double target, String deadline, boolean typeOfGoal){
-        this.name=name;
-        this.type=type;
-        this.target=target;
-        this.deadline=deadline;
-        this.typeOfGoal=typeOfGoal;
+    public Goal(String athleteName, String metricType, double targetValue, String deadline, boolean higherIsBetter) {
+        this.athleteName = athleteName;
+        this.metricType = metricType;
+        this.targetValue = targetValue;
+        this.deadline = deadline;
+        this.higherIsBetter = higherIsBetter;
     }
 
-    public String toString(){
-        return name + " has a goal for " + type + " of " + target + " by " + deadline;
+    public String getAthleteName() {
+        return athleteName;
     }
 
-    public double getTarget(){
-        return target;
+    public String getMetricType() {
+        return metricType;
+    }
+
+    public double getTargetValue() {
+        return targetValue;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public boolean isHigherIsBetter() {
+        return higherIsBetter;
+    }
+
+    @Override
+    public String toString() {
+        return athleteName + " goal: " + metricType + " -> " + targetValue + " by " + deadline +
+                (higherIsBetter ? " (higher better)" : " (lower better)");
     }
 }

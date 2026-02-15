@@ -1,26 +1,35 @@
 import java.util.ArrayList;
-public class InjuryTracker() extends InjuryIncident{
-    private ArrayList<InjuryIncident> incidents;
-    private Scanner sc;
 
-    public void logIncident(InjuryIncident i){
-        incidents.add(x);
+/**
+ * Keeps track of injury incidents (ArrayList + search).
+ */
+public class InjuryTracker {
+    private final ArrayList<InjuryIncident> incidents;
+
+    public InjuryTracker() {
+        incidents = new ArrayList<>();
     }
 
-    public InjuryIncident getByAthlete(String name){
-        super(athleteName);
-        for(int i = 0, i<incidents.size()-1,i++){
-            if(incidents.get(i).toString.contains(name)){
-                return incidents.get(i);
-            }
+    public void logIncident(InjuryIncident i) {
+        incidents.add(i);
+    }
+
+    public ArrayList<InjuryIncident> getByAthlete(String athleteName) {
+        ArrayList<InjuryIncident> results = new ArrayList<>();
+        for (InjuryIncident inc : incidents) {
+            if (inc.getAthleteName().equalsIgnoreCase(athleteName)) results.add(inc);
+        }
+        return results;
+    }
+
+    public void listAll() {
+        if (incidents.isEmpty()) {
+            System.out.println("No injury incidents logged.");
+            return;
+        }
+        System.out.println("=== Injury Incidents ===");
+        for (InjuryIncident inc : incidents) {
+            System.out.println(" - " + inc);
         }
     }
-
-    public void listAll(){
-        for(InjuryIncident injuries : incidents){
-            System.out.println(injuries.toString);
-        }
-
-    }
-
 }

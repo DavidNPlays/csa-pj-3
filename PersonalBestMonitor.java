@@ -1,56 +1,98 @@
 import java.util.ArrayList;
-public Class PersonalBestMonitor(){
-   private ArrayList<Goal> goals;
-   private ArrayList<PerformanceEntry> entries;
 
-    public void addGoal(Goal goal){
+/**
+ * Tracks goals and personal bests for athletes.
+ */
+public class PersonalBestMonitor {
+    private final ArrayList<Goal> goals;
+    private final ArrayList<PerformanceEntry> entries;
+
+    public PersonalBestMonitor() {
+        goals = new ArrayList<>();
+        entries = new ArrayList<>();
+    }
+
+    public void addGoal(Goal goal) {
         goals.add(goal);
     }
-    public void logEntry(PerformanceEntry entry){
+
+    public ArrayList<Goal> getGoals() {
+        return goals;
+    }
+
+    public void logEntry(PerformanceEntry entry) {
         entries.add(entry);
     }
-    public boolean isNewPB(PerformanceEntry entry){ //dont log entry until isNewPB is called
-        private ArrayList<PerformanceEntry> current;
-        String curName=entry.getName();
-        String curType=entry.getType();
-        String curGoal=entry.getGoal();
-        String curValue=entry.getValue()
-        int currentPB = 0
-        for(PerformanceEntry current :entries){
-            if(entries.getName()=curName && entries.getType()=curType && entries.getGoal()=curGoal){
-                double cur = entries.getValue();
-            }
-            if(entry.gettypeOfGoal()){
-            if(cur>currentPB){
-                currentPB=cur;
+
+    public ArrayList<PerformanceEntry> getEntries() {
+        return entries;
+    }
+
+    public Goal findGoal(String athleteName, String metricType) {
+        for (Goal g : goals) {
+            if (g.getAthleteName().equalsIgnoreCase(athleteName) &&
+                    g.getMetricType().equalsIgnoreCase(metricType)) {
+                return g;
             }
         }
-        else{
-            if(cur<currentPB){
-               currentPB=cur; 
+        return null;
+    }
+
+    /**
+     * Checks if the given entry is a new personal best compared to previous entries
+     * for the same athlete+metricType. Uses the goal's "higherIsBetter" when available;
+     * if no goal exists, assume higher is better.
+     */
+    public boolean isNewPersonalBest(PerformanceEntry entry) {
+        boolean higherIsBetter = true;
+        Goal g = findGoal(entry.getAthleteName(), entry.getMetricType());
+        if (g != null) higherIsBetter = g.isHigherIsBetter();
+
+        Double best = null;
+        for (PerformanceEntry e : entries) {
+            if (e == entry) continue;
+            if (e.getAthleteName().equalsIgnoreCase(entry.getAthleteName())
+                    && e.getMetricType().equalsIgnoreCase(entry.getMetricType())) {
+                if (best == null) best = e.getValue();
+                else {
+                    if (higherIsBetter) best = Math.max(best, e.getValue());
+                    else best = Math.min(best, e.getValue());
+                }
             }
         }
+
+        // No prior entries -> treat as PB
+        if (best == null) return true;
+
+        if (higherIsBetter) return entry.getValue() > best;
+        return entry.getValue() < best;
     }
-       if(entry.gettypeOfGoal()){
-            if(curValue>currentPB){
-                return true;
+
+    /**
+     * Returns percent progress to goal (100% = goal met).
+     */
+    public Double progressToGoal(String athleteName, String metricType) {
+        Goal g = findGoal(athleteName, metricType);
+        if (g == null) return null;
+
+        PerformanceEntry latest = null;
+        for (PerformanceEntry e : entries) {
+            if (e.getAthleteName().equalsIgnoreCase(athleteName) &&
+                    e.getMetricType().equalsIgnoreCase(metricType)) {
+                latest = e;
             }
-            else{return false;}
         }
-        else{
-            if(curValue<currentPB){
-               return true;
-            }
-            else{return false;}
-        } 
-}
-    public double progressToGoal(String name, double value, double type, Goal current){
-        double current = current.getTarget();
-        if(entry.gettypeOfGoal()){
-            return (value/current)*100;
+        if (latest == null) return null;
+
+        double target = g.getTargetValue();
+        double value = latest.getValue();
+
+        if (g.isHigherIsBetter()) {
+            return (value / target) * 100.0;
+        } else {
+            // lower is better (like time). if value == 0 avoid divide by zero
+            if (value == 0) return null;
+            return (target / value) * 100.0;
+        }
     }
-    else{
-        return (current/value)*100;
-    }
-}
 }
