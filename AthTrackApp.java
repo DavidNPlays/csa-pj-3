@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * AthTrack - console dashboard for coaches.
- * Demonstrates: OOP, abstraction/inheritance, ArrayList, 2D array, loops, conditionals, HashMap.
- */
+
 public class AthTrackApp {
+    //final variables for immutability(doesn't change)
     private final Scanner sc;
     private final AuthService auth;
 
@@ -26,11 +24,12 @@ public class AthTrackApp {
 
     private final PlayerSearchFilter searchFilter;
 
-    // last teams to support manual swap
+    // last teams to support manual swap(in order to remember)
     private ArrayList<ArrayList<Athlete>> lastTeams;
 
     public AthTrackApp() {
         sc = new Scanner(System.in);
+        //initializing
         auth = new AuthService();
 
         roster = new AthleteRoster();
@@ -47,21 +46,23 @@ public class AthTrackApp {
         injuryTracker = new InjuryTracker();
 
         searchFilter = new PlayerSearchFilter();
+        //null at the start bc haven't made teams yet
         lastTeams = null;
     }
 
     public static void main(String[] args) {
+        //run command
         new AthTrackApp().run();
     }
 
     public void run() {
         currentCoach = auth.login(sc);
         if (currentCoach == null) {
+            // if user inputs the wrong login 3 times, restart the program
             System.out.println("Login failed. Exiting.");
             return;
         }
 
-        // Polymorphism demo for abstract User:
         User u = currentCoach;
         System.out.println("Logged in as: " + u.getName() + " (" + u.getRole() + ")\n");
 
@@ -69,24 +70,48 @@ public class AthTrackApp {
         while (running) {
             printMenu();
             int choice = InputHelper.readInt(sc, "Choose an option: ", 0, 12);
-
-            switch (choice) {
-                case 1 -> addAthleteFlow();
-                case 2 -> roster.printRoster();
-                case 3 -> sortTeamsFlow();
-                case 4 -> manualSwapFlow();
-                case 5 -> practiceMonitorFlow();
-                case 6 -> schedulePracticeFlow();
-                case 7 -> logWorkoutFlow();
-                case 8 -> takeAttendanceFlow();
-                case 9 -> printSummaryFlow();
-                case 10 -> personalBestFlow();
-                case 11 -> injuryFlow();
-                case 12 -> searchFilterFlow();
-                case 0 -> running = false;
+            //all options(functionalities) for user to pick
+            if(choice == 1) {
+                addAthleteFlow();
             }
-            System.out.println();
-        }
+            if(choice == 2) {
+                roster.printRoster();
+            }
+            if(choice == 3) {
+                sortTeamsFlow();
+            }
+            if(choice == 4) {
+                manualSwapFlow();
+            }
+            if(choice == 5) {
+                practiceMonitorFlow();
+            }
+            if(choice == 6) {
+                schedulePracticeFlow();
+            }
+            if(choice == 7) {
+                logWorkoutFlow();
+            }
+            if(choice == 8) {
+                takeAttendanceFlow();
+            }
+            if(choice == 9) {
+                printSummaryFlow();
+            }
+            if(choice == 10) {
+                personalBestFlow();
+            }
+            if(choice == 11) {
+                injuryFlow();
+            }
+            if(choice == 12) {
+                searchFilterFlow();
+            }
+            if(choice == 0) {
+                running = false;
+            }
+
+}
 
         System.out.println("Goodbye!");
     }
