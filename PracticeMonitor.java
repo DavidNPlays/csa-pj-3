@@ -1,18 +1,18 @@
 /**
  * Tracks practices per week and a weekly plan using a 2D array.
- * This is a strong way to show "arrays/2D arrays" on the rubric.
  */
 public class PracticeMonitor {
     private int practicesPerWeek;
 
-    // 2D array: [dayOfWeek][slot] where each day can have up to 2 practice times.
+    // 2D array[day][slot] for weekly schedule
+    // slot 0 = morning, slot 1 = afternoon
     private final String[][] weeklySchedule;
-
+    
     public PracticeMonitor() {
         practicesPerWeek = 0;
         weeklySchedule = new String[7][2];
     }
-
+    // Getters and setters
     public void setPracticesPerWeek(int n) {
         practicesPerWeek = n;
     }
@@ -20,17 +20,17 @@ public class PracticeMonitor {
     public int getPracticesPerWeek() {
         return practicesPerWeek;
     }
-
+    // boolean method to check valid day and slot
     public boolean assignPractice(int dayIndex0to6, int slot0or1, String time) {
         if (dayIndex0to6 < 0 || dayIndex0to6 > 6) return false;
         if (slot0or1 < 0 || slot0or1 > 1) return false;
 
-        // Basic conflict check
+        // Check if the slot is already occupied
         if (weeklySchedule[dayIndex0to6][slot0or1] != null) return false;
         weeklySchedule[dayIndex0to6][slot0or1] = time;
         return true;
     }
-
+    // Method to print the weekly schedule
     public void printWeeklySchedule() {
         String[] days = {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
         System.out.println("=== Weekly Practice Plan (2D array) ===");
